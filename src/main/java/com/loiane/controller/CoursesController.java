@@ -23,6 +23,12 @@ public class CoursesController {
         return courseRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Course> findById(@PathVariable("id") Long idDoCurso){
+        return courseRepository.findById(idDoCurso)
+                .map(record -> ResponseEntity.ok().body(record))
+                .orElse(ResponseEntity.notFound().build());
+    }
 //    @PostMapping -- mais atual
 //    public ResponseEntity<Course> create(@RequestBody Course course){
 //        Course courseCreated = courseRepository.save(course);
